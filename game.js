@@ -26,7 +26,7 @@ var TimerText;
 var timer;
 var gameOver = false;
 var objects;
-var initialNumberOfObjects = 10;
+var initialNumberOfObjects = 4;
 var currentNumberOfObjects = initialNumberOfObjects;
 var endText;
 
