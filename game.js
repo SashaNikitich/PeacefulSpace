@@ -29,6 +29,8 @@ var objects;
 var initialNumberOfObjects = 4;
 var currentNumberOfObjects = initialNumberOfObjects;
 var endText;
+var worldWidth = 2000;
+var worldHeight = 1000;
 
 function preload() {
     // Load assets
