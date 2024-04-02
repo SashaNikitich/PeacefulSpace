@@ -148,8 +148,8 @@ function updateTime() {
 
         this.physics.pause();
 
-        endText = this.add.text(250, 220, "Press ENTER to try again", {fontSize: '35px', fill: '#fff'});
-        this.add.text(250, 260, "Your score is: " + Score, {fontSize: '35px', fill: '#fff'});
+        endText = this.add.text(250, 220, "Press ENTER to try again", {fontSize: '35px', fill: '#fff'}).setScrollFactor(0);
+        this.add.text(250, 260, "Your score is: " + Score, {fontSize: '35px', fill: '#fff'}).setScrollFactor(0);
 
         document.addEventListener('keyup', function (event) {
             if (event.code === 'Enter') {
