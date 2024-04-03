@@ -26,9 +26,11 @@ var TimerText;
 var timer;
 var gameOver = false;
 var objects;
-var initialNumberOfObjects = 4;
+var initialNumberOfObjects = 10;
 var currentNumberOfObjects = initialNumberOfObjects;
 var endText;
+var worldWidth = 2000;
+var worldHeight = 1100;
 
 function preload() {
     // Load assets
@@ -42,7 +44,7 @@ function create ()
 {
 
     //Add background
-    this.background = this.add.image(500, 250, "background");
+    background = this.add.tileSprite(0, 0, worldWidth, worldHeight, "background").setOrigin(0, 0);
 
     //#region Player
     player = this.physics.add.sprite(100, 450, 'player').setScale(0.15)
@@ -78,6 +80,14 @@ function create ()
         loop: true
     });
     //#endregion
+
+    //Camera settings
+    this.cameras.main.setBounds(0, 0, worldWidth, 1080);
+    this.physics.world.setBounds(0, 0, worldWidth, 1080);
+
+    // Start camera follow
+    this.cameras.main.startFollow(player);
+
 
     createWorldObjects(object1, 'object1', initialNumberOfObjects);
     createWorldObjects(object2, 'object2', initialNumberOfObjects);
@@ -138,8 +148,8 @@ function updateTime() {
 
         this.physics.pause();
 
-        endText = this.add.text(250, 220, "Press ENTER to try again", {fontSize: '35px', fill: '#fff'});
-        this.add.text(250, 260, "Your score is: " + Score, {fontSize: '35px', fill: '#fff'});
+        endText = this.add.text(250, 220, "Press ENTER to try again", {fontSize: '35px', fill: '#fff'}).setScrollFactor(0);
+        this.add.text(250, 260, "Your score is: " + Score, {fontSize: '35px', fill: '#fff'}).setScrollFactor(0);
 
         document.addEventListener('keyup', function (event) {
             if (event.code === 'Enter') {
@@ -171,8 +181,8 @@ function createNewObjects() {
 function createWorldObjects(objects, asset, count) {
     objects.clear(true, true);
     for (var i = 0; i < count; i++) {
-        var randomX = Phaser.Math.Between(0, config.width);
-        var randomY = Phaser.Math.Between(0, config.height);
+        var randomX = Phaser.Math.Between(0, worldWidth);
+        var randomY = Phaser.Math.Between(0, worldHeight);
 
         objects
             .create(randomX, randomY, asset)
