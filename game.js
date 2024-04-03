@@ -31,10 +31,11 @@ var currentNumberOfObjects = initialNumberOfObjects;
 var endText;
 var worldWidth = 2000;
 var worldHeight = 1100;
+var enemies;
 
 function preload() {
     // Load assets
-    this.load.image('background', 'assets/background/space.png');
+    this.load.image('background', 'assets/background/space.jpg');
     this.load.image('player', 'assets/player.png');
     this.load.image('object1', 'assets/spacemoor-1.png')
     this.load.image('object2', 'assets/spacemoor-2.png')
@@ -47,7 +48,7 @@ function create ()
     background = this.add.tileSprite(0, 0, worldWidth, worldHeight, "background").setOrigin(0, 0);
 
     //#region Player
-    player = this.physics.add.sprite(100, 450, 'player').setScale(0.15)
+    player = this.physics.add.sprite(1000, 550, 'player').setScale(0.15)
         .setCollideWorldBounds(true);
 
     cursors = this.input.keyboard.createCursorKeys();
@@ -81,6 +82,8 @@ function create ()
     });
     //#endregion
 
+   
+
     //Camera settings
     this.cameras.main.setBounds(0, 0, worldWidth, 1080);
     this.physics.world.setBounds(0, 0, worldWidth, 1080);
@@ -96,6 +99,8 @@ function create ()
 function update ()
 {
     //#region Movement
+    player.setVelocity(0)
+
     if (cursors.left.isDown && cursors.up.isDown) {
         player.setVelocityX(-400);
         player.setVelocityY(-400);
@@ -189,5 +194,3 @@ function createWorldObjects(objects, asset, count) {
             .setScale(Phaser.Math.FloatBetween(0.8, 1.5));
     }
 }
-
-
